@@ -42,5 +42,14 @@ function addTask(taskData) {
 }
 
 function findTask() {
-  return db("tasks");
+  return db("tasks as t")
+    .join("projects as p")
+    .select(
+      "t.id",
+      "t.description",
+      "t.notes",
+      "t.completed",
+      "p.name as ProjectName",
+      "p.description as ProjectDescription"
+    );
 }
